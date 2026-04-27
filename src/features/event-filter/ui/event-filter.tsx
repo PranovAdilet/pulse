@@ -1,12 +1,15 @@
 "use client";
 
 import { ChangeEvent, useEffect } from "react";
-import { filterTypes } from "../model/filter-options";
-import { useEventFilterStore } from "../model/use-event-filter-store";
-import { eventBus, useEventStore, userEvent } from "@/entities/event";
-import { EventFilterOption } from "../model/types";
+
 import { useDebounce } from "@/shared/hooks";
 import { cn } from "@/shared/lib";
+
+import { eventBus, useEventStore, userEvent } from "@/entities/event";
+
+import { filterTypes } from "../model/filter-options";
+import { useEventFilterStore } from "../model/use-event-filter-store";
+import { EventFilterOption } from "../model/types";
 
 export const EventFilter = () => {
   const { filter, setFilter } = useEventFilterStore();
@@ -16,8 +19,6 @@ export const EventFilter = () => {
   const debouncedSearch = useDebounce(filter.search);
 
   useEffect(() => {
-    if (!debouncedSearch) return;
-
     eventBus.emit(userEvent.search(debouncedSearch));
   }, [debouncedSearch]);
 
@@ -37,7 +38,7 @@ export const EventFilter = () => {
   };
 
   return (
-    <div className="flex items-center gap-3 px-2">
+    <div className="flex flex-wrap items-center gap-3 px-2 ">
       {/* кнопки */}
       <div className="flex gap-2">
         {filterTypes.map((type) => (

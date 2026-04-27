@@ -1,8 +1,8 @@
 "use client";
 
 import { useMemo } from "react";
-import { useEventStore } from "@/entities/event";
 import { cn } from "@/shared/lib";
+import { useEventStore } from "@/entities/event";
 
 export const StatsBar = () => {
   const { events, buffer, paused } = useEventStore();

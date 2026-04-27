@@ -1,8 +1,8 @@
 "use client";
 
+import { useMemo } from "react";
 import { EventCard, useEventStore } from "@/entities/event";
 import { useEventFilterStore } from "@/features/event-filter";
-import { useMemo } from "react";
 
 export const EventFeed = () => {
   const { events } = useEventStore();

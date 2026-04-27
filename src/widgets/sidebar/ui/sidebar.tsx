@@ -2,8 +2,8 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { navItems } from "../model/config";
 import { cn } from "@/shared/lib";
+import { navItems } from "../model/config";
 
 export const Sidebar = () => {
   const pathname = usePathname();
