@@ -1,12 +1,12 @@
 "use client";
 
 import { ChangeEvent, useEffect } from "react";
-import { cn } from "@/shared/lib";
-import { useDebounce } from "@/shared/hooks";
 import { filterTypes } from "../model/filter-options";
 import { useEventFilterStore } from "../model/use-event-filter-store";
 import { eventBus, useEventStore, userEvent } from "@/entities/event";
 import { EventFilterOption } from "../model/types";
+import { useDebounce } from "@/shared/hooks";
+import { cn } from "@/shared/lib";
 
 export const EventFilter = () => {
   const { filter, setFilter } = useEventFilterStore();

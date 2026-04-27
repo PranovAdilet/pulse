@@ -2,12 +2,10 @@
 
 import { useMemo } from "react";
 import { useEventStore } from "@/entities/event";
-import { useEventFilterStore } from "@/features/event-filter";
 import { cn } from "@/shared/lib";
 
 export const StatsBar = () => {
   const { events, buffer, paused } = useEventStore();
-  const { filter } = useEventFilterStore();
 
   const errors = useMemo(
     () => events.filter((e) => e.type === "ERROR"),

@@ -1,9 +1,9 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { navItems } from "../model/config";
 import { cn } from "@/shared/lib";
-import { usePathname } from "next/navigation";
 
 export const Sidebar = () => {
   const pathname = usePathname();
