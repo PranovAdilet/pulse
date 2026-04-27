@@ -3,15 +3,11 @@
 import { ReactNode } from "react";
 import { Sidebar } from "@/widgets/sidebar";
 import { Header } from "@/widgets/header";
-
-import { useRouteTracker } from "@/shared/hooks";
-import { EventProvider } from "../providers";
+import { SystemProvider } from "../providers";
 
 export default function DashboardLayout({ children }: { children: ReactNode }) {
-  useRouteTracker();
-
   return (
-    <EventProvider>
+    <SystemProvider>
       <div className="flex flex-col size-full">
         <Header />
         <div className="flex flex-1 overflow-hidden">
@@ -19,6 +15,6 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
           <main className="flex-1 overflow-auto">{children}</main>
         </div>
       </div>
-    </EventProvider>
+    </SystemProvider>
   );
 }

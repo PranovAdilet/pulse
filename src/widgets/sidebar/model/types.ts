@@ -1,5 +1,5 @@
 export type NavHref = 
-    | "/dashboard"
+    | "/"
     | "/analytics"
     | "/events"
     | "/settings"
