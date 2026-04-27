@@ -9,9 +9,16 @@ export const EventFeed = () => {
   const { filter } = useEventFilterStore();
 
   const filteredEvents = useMemo(() => {
-    if (filter.type === "ALL") return events;
-    return events.filter((e) => e.type === filter.type);
-  }, [filter.type, events]);
+    return events.filter((e) => {
+      const search = filter.search.toLowerCase();
+      const matchType = filter.type === "ALL" || e.type === filter.type;
+      const matchSearch =
+        !search ||
+        e.message.toLowerCase().includes(search) ||
+        e.type.toLowerCase().includes(search);
+      return matchType && matchSearch;
+    });
+  }, [events, filter.search, filter.type]);
 
   if (!filteredEvents.length) {
     return <div className="text-gray-400 text-sm px-2">No events found...</div>;

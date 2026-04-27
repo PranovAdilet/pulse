@@ -1,10 +1,13 @@
 "use client";
 
-import { useEventStore } from "@/entities/event";
 import { useMemo } from "react";
+import { useEventStore } from "@/entities/event";
+import { useEventFilterStore } from "@/features/event-filter";
+import { cn } from "@/shared/lib";
 
 export const StatsBar = () => {
-  const { events } = useEventStore();
+  const { events, buffer, paused } = useEventStore();
+  const { filter } = useEventFilterStore();
 
   const errors = useMemo(
     () => events.filter((e) => e.type === "ERROR"),
@@ -34,8 +37,19 @@ export const StatsBar = () => {
       </div>
 
       <div className="ml-auto flex items-center gap-1">
-        <span className="text-green-400">●</span>
-        <span className="text-gray-300">Live</span>
+        {paused && buffer.length > 0 && (
+          <div className="text-xs text-yellow-400 px-2">
+            +{buffer.length} new events
+          </div>
+        )}
+        <span
+          className={cn(
+            "text-sm",
+            paused ? "text-yellow-400" : "text-green-400",
+          )}
+        >
+          ● {paused ? "Paused" : "Live"}
+        </span>
       </div>
     </div>
   );

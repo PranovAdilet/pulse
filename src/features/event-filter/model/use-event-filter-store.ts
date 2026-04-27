@@ -3,14 +3,21 @@ import {  EventFilterState } from "./types";
 
 type EventFilterStore = {
   filter: EventFilterState
-  setFilter: (filter: EventFilterState) => void
+  setFilter: (filter: Partial<EventFilterState>) => void
+ 
 };
 
 export const useEventFilterStore = create<EventFilterStore>((set) => ({
     filter: {
-      type: "ALL"
+      type: "ALL",
+      search: "",
     },
-    setFilter: (filter) => set({filter})
+    setFilter: (filter) => set((state) => ({
+      filter: {
+        ...state.filter,
+        ...filter
+      }
+    }))
   }));
 
 

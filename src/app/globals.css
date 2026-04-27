@@ -24,3 +24,30 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #444 #121212;
+}
+
+/* Chrome / Edge / Safari */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #121212;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #3a3a3a, #222);
+  border-radius: 999px;
+  border: 2px solid #121212;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #555, #2a2a2a);
+}

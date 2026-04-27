@@ -9,4 +9,5 @@ export type EventFilterOption = {
 
 export type EventFilterState = {
     type: EventFilterValue
+    search: string
   }

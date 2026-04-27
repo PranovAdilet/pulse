@@ -5,5 +5,7 @@ export type Event = {
     type: EventType;
     message: string;
     timestamp: number;
+
+    source: "USER" | "SYSTEM";
 }
 

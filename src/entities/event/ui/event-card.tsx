@@ -1,6 +1,6 @@
 "use client";
 
-import { Event } from "../model/types";
+import { Event } from "../model/core/types";
 
 export const EventCard = ({ event }: { event: Event }) => {
   return (
@@ -11,6 +11,7 @@ export const EventCard = ({ event }: { event: Event }) => {
           {new Date(event.timestamp).toLocaleTimeString()}
         </span>
       </div>
+      <span className="text-xs text-gray-400">[{event.source}]</span>
 
       <div className="text-sm text-gray-300 mt-1">{event.message}</div>
     </div>
