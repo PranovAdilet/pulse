@@ -3,7 +3,7 @@
 import { ReactNode } from "react";
 import { Sidebar } from "@/widgets/sidebar";
 import { Header } from "@/widgets/header";
-import { SystemProvider } from "../providers";
+import { SystemProvider } from "../providers/system-provider";
 
 export default function DashboardLayout({ children }: { children: ReactNode }) {
   return (
@@ -12,7 +12,7 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
         <Header />
         <div className="flex flex-1 overflow-hidden">
           <Sidebar />
-          <main className="flex-1 overflow-auto">{children}</main>
+          <main className="flex-1 flex">{children}</main>
         </div>
       </div>
     </SystemProvider>

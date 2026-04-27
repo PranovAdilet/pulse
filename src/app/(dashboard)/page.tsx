@@ -4,7 +4,7 @@ import { StatsBar } from "@/widgets/stats-bar";
 
 const DashboardPage = () => {
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-4 grow">
       <StatsBar />
       <EventFilter />
       <EventFeed />
