@@ -1,1 +1,1 @@
-export {cn} from "./classname"
+export {cn} from "./cn"
