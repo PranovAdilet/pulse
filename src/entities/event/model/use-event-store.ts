@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { Event } from "../core/types";
+import { Event } from "./types";
 
 type State = {
   events: Event[];
@@ -12,6 +12,8 @@ type State = {
   setEvents: (events: Event[]) => void;
 
   flushBuffer: () => void
+
+  clear: () => void
 };
 
 export const useEventStore = create<State>((set) => ({
@@ -19,6 +21,7 @@ export const useEventStore = create<State>((set) => ({
     buffer: [],
     paused: false,
     setPaused: (v) => set({ paused: v }),
+    clear: () => set({ events: [], buffer: [] }),
     setEvents: (events) => set({ events }),
     setEvent: (event) =>
       set((state) => {

@@ -1,12 +1,13 @@
 "use client";
 
-import { eventBus, useEventStore } from "@/entities/event";
+import { useEventStore } from "@/entities/event";
 import { useEffect, useRef, useState } from "react";
 
 type ConnectingStatus = "connecting" | "connected" | "disconnected";
 
 export const useEventStream = () => {
   const paused = useEventStore((s) => s.paused);
+  const setEvent = useEventStore((s) => s.setEvent);
   const pausedRef = useRef(paused);
 
   const [status, setStatus] = useState<ConnectingStatus>("connecting");
@@ -20,7 +21,7 @@ export const useEventStream = () => {
 
     source.onmessage = (event) => {
       const data = JSON.parse(event.data);
-      eventBus.emit(data);
+      setEvent(data);
     };
 
     source.onopen = () => {
@@ -37,7 +38,7 @@ export const useEventStream = () => {
     return () => {
       source.close();
     };
-  }, []);
+  }, [setEvent]);
 
   return status;
 };

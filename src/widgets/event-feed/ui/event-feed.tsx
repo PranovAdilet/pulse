@@ -9,13 +9,18 @@ export const EventFeed = () => {
   const { filter } = useEventFilterStore();
 
   const filteredEvents = useMemo(() => {
+    const search = filter.search.toLowerCase();
+
     return events.filter((e) => {
-      const search = filter.search.toLowerCase();
-      const matchType = filter.type === "ALL" || e.type === filter.type;
+      const matchType = filter.type === "ALL" || e.level === filter.type;
+
       const matchSearch =
         !search ||
-        e.message.toLowerCase().includes(search) ||
-        e.type.toLowerCase().includes(search);
+        e.type.toLowerCase().includes(search) ||
+        JSON.stringify(e.payload ?? {})
+          .toLowerCase()
+          .includes(search);
+
       return matchType && matchSearch;
     });
   }, [events, filter.search, filter.type]);

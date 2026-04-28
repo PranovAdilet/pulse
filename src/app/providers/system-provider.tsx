@@ -1,16 +1,14 @@
 "use client";
 
-import { ReactNode, useEffect } from "react";
-import { useRouteTracker } from "@/shared/hooks";
-import { useEventBusBridge } from "@/entities/event";
-import { initEventSystem } from "@/entities/event";
+import { ReactNode } from "react";
+import { useRouteTracker } from "@/features/route-tracking";
 
 export const SystemProvider = ({ children }: { children: ReactNode }) => {
-  useEffect(() => {
-    initEventSystem();
-  }, []);
+  // useEffect(() => {
+  //   initEventSystem();
+  // }, []);
 
-  useEventBusBridge();
+  // useEventBusBridge();
   useRouteTracker();
 
   return children;

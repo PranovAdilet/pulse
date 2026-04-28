@@ -8,12 +8,12 @@ export const StatsBar = () => {
   const { events, buffer, paused } = useEventStore();
 
   const errors = useMemo(
-    () => events.filter((e) => e.type === "ERROR"),
+    () => events.filter((e) => e.level === "ERROR"),
     [events],
   ).length;
 
   const success = useMemo(
-    () => events.filter((e) => e.type === "SUCCESS"),
+    () => events.filter((e) => e.level === "SUCCESS"),
     [events],
   ).length;
 

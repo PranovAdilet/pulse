@@ -5,7 +5,7 @@ import { ChangeEvent, useEffect } from "react";
 import { useDebounce } from "@/shared/hooks";
 import { cn } from "@/shared/lib";
 
-import { eventBus, useEventStore, userEvent } from "@/entities/event";
+import { useEventStore, userEvent } from "@/entities/event";
 
 import { filterTypes } from "../model/filter-options";
 import { useEventFilterStore } from "../model/use-event-filter-store";
@@ -14,22 +14,27 @@ import { EventFilterOption } from "../model/types";
 export const EventFilter = () => {
   const { filter, setFilter } = useEventFilterStore();
 
-  const { flushBuffer, paused, setPaused } = useEventStore();
+  const { flushBuffer, paused, setPaused, clear, setEvent } = useEventStore();
 
   const debouncedSearch = useDebounce(filter.search);
 
   useEffect(() => {
-    eventBus.emit(userEvent.search(debouncedSearch));
-  }, [debouncedSearch]);
+    if (!debouncedSearch) return;
+    setEvent(userEvent.search(debouncedSearch));
+  }, [debouncedSearch, setEvent]);
 
   const toggle = () => {
     if (paused) flushBuffer();
     setPaused(!paused);
   };
 
+  const handleClear = () => {
+    clear();
+  };
+
   const handleChangeFilterType = (type: EventFilterOption["value"]) => {
     setFilter({ type });
-    eventBus.emit(userEvent.filterChange(type));
+    setEvent(userEvent.filterChange(type));
   };
 
   const handleSearch = (e: ChangeEvent<HTMLInputElement>) => {
@@ -59,12 +64,20 @@ export const EventFilter = () => {
         ))}
       </div>
 
-      <button
-        onClick={toggle}
-        className="ml-auto px-2 py-1 text-sm border border-white/10 rounded hover:bg-white/5"
-      >
-        {paused ? "Resume" : "Pause"}
-      </button>
+      <div className="flex gap-2">
+        <button
+          onClick={handleClear}
+          className="ml-auto px-2 py-1 text-sm border border-white/10 bg-red-900 rounded hover:opacity-90"
+        >
+          Clear
+        </button>
+        <button
+          onClick={toggle}
+          className="ml-auto px-2 py-1 text-sm border border-white/10 rounded hover:bg-white/5"
+        >
+          {paused ? "Resume" : "Pause"}
+        </button>
+      </div>
 
       <input
         value={filter.search}

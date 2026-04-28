@@ -1,6 +1,6 @@
-import { EventType } from "@/entities/event";
+import { EventLevel,  } from "@/entities/event";
 
-type EventFilterValue = EventType | "ALL"
+type EventFilterValue = EventLevel | "ALL"
 
 export type EventFilterOption = {
     label: string;
